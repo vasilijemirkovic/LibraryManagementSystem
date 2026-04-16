@@ -1,0 +1,32 @@
+﻿<Window x:Class="LibraryManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LibraryManagementSystem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
+
+        <TextBox x:Name="TitleBox" Margin="5" />
+        <TextBox x:Name="AuthorBox" Margin="5" />
+
+        <Button Content="Add Book" Click="AddBook_Click" Margin="5"/>
+        <Button Content="Delete Book" Click="DeleteBook_Click" Margin="5"/>
+        <Button Content="Borrow Book" Click="BorrowBook_Click" Margin="5"/>
+        <Button Content="Return Book" Click="ReturnBook_Click" Margin="5"/>
+
+        <TextBox x:Name="SearchBox" Margin="5" TextChanged="SearchBox_TextChanged"/>
+
+        <DataGrid x:Name="BooksGrid" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" SortMemberPath="Id" />
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" SortMemberPath="Title" />
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" SortMemberPath="Author" />
+                <DataGridTextColumn Header="Available" Binding="{Binding Status}" SortMemberPath="Status" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </StackPanel>
+</Window>
