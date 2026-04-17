@@ -16,6 +16,10 @@ namespace LibraryManagementSystem
         private string filePath = "books.json";
         private ObservableCollection<Book> books = new ObservableCollection<Book>();
 
+        public Library() {
+            loadFromFile();
+        }
+
         public void addBook(string title, string author) { books.Add(new Book(nextId, title, author)); nextId++; }
         public string removeBook(int Id)
         {
@@ -78,6 +82,19 @@ namespace LibraryManagementSystem
         {
             var json = System.Text.Json.JsonSerializer.Serialize(books);
             File.WriteAllText(filePath, json);
+        }
+
+        private void loadFromFile()
+        {
+            if (File.Exists(filePath))
+            {
+                var json = File.ReadAllText(filePath);
+                var loadedBooks = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
+
+                if (loadedBooks != null) {
+                    books = loadedBooks;
+                }
+            }
         }
     }
 }
