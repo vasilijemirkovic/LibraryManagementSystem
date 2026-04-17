@@ -20,19 +20,27 @@ namespace LibraryManagementSystem
             loadFromFile();
         }
 
-        public void addBook(string title, string author) { books.Add(new Book(nextId, title, author)); nextId++; }
-        public string removeBook(int Id)
-        {
+        public void addBook(string title, string author) {
+            books.Add(new Book(nextId, title, author));
+            nextId++;
+            saveToFile();
+        }
+
+        public string removeBook(int Id) {
             var bookToDelete = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToDelete == null) return "Not found!";
+            if (bookToDelete == null)
+            {
+                saveToFile();
+                return "Not found!";
+            }
 
             else
             {
                 books.Remove(bookToDelete);
+                saveToFile();
                 return "Deleted!";
             }
-
         }
         public void showBooks()
         {
@@ -50,11 +58,16 @@ namespace LibraryManagementSystem
         {
             var bookToBorrow = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToBorrow == null) return "Not found!";
+            if (bookToBorrow == null)
+            {
+                saveToFile();
+                return "Not found!";
+            }
 
             else
             {
                 bookToBorrow.IsBorrowed = true;
+                saveToFile();
                 return "Borrowed!";
             }
         }
@@ -63,13 +76,22 @@ namespace LibraryManagementSystem
         {
             var bookToReturn = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToReturn == null) return "Not found!";
+            if (bookToReturn == null)
+            {
+                saveToFile();
+                return "Not found!";
+            }
 
-            else if (bookToReturn.IsBorrowed == false) return "Book is already in library!";
+            else if (bookToReturn.IsBorrowed == false)
+            {
+                saveToFile();
+                return "Book is already in library!";
+            }
 
             else
             {
                 bookToReturn.IsBorrowed = false;
+                saveToFile();
                 return "Borrowed!";
             }
 
