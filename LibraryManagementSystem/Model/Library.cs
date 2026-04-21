@@ -102,7 +102,7 @@ namespace LibraryManagementSystem
 
         private void saveToFile()
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(books);
+            var json = JsonSerializer.Serialize(books);
             File.WriteAllText(filePath, json);
         }
 
@@ -111,11 +111,15 @@ namespace LibraryManagementSystem
             if (File.Exists(filePath))
             {
                 var json = File.ReadAllText(filePath);
-                var loadedBooks = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
+                var loadedBooks = JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
 
                 if (loadedBooks != null) {
                     books = loadedBooks;
                 }
+            }
+            if (books.Any())
+            {
+                nextId = books.Max(b => b.Id) + 1;
             }
         }
     }
