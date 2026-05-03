@@ -13,7 +13,7 @@ namespace LibraryManagementSystem
     internal class Library
     {
         private int nextId = 1;
-        private string filePath = "books.json";
+        private readonly string filePath = "books.json";
         private ObservableCollection<Book> books = new ObservableCollection<Book>();
 
         public Library() {
