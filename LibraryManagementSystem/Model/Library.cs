@@ -26,21 +26,14 @@ namespace LibraryManagementSystem
             saveToFile();
         }
 
-        public string removeBook(int Id) {
+        public bool removeBook(int Id) {
             var bookToDelete = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToDelete == null)
-            {
-                saveToFile();
-                return "Not found!";
-            }
+            if (bookToDelete == null) return false;
 
-            else
-            {
-                books.Remove(bookToDelete);
-                saveToFile();
-                return "Deleted!";
-            }
+            books.Remove(bookToDelete);
+            saveToFile();
+            return true;
         }
         public void showBooks()
         {
