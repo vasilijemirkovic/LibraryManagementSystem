@@ -58,28 +58,16 @@ namespace LibraryManagementSystem
             return true;
         }
 
-        public string returnBook(int Id)
+        public bool returnBook(int Id)
         {
             var bookToReturn = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToReturn == null)
-            {
-                saveToFile();
-                return "Not found!";
-            }
+            if (bookToReturn == null || !bookToReturn.IsBorrowed) return false;
 
-            else if (bookToReturn.IsBorrowed == false)
-            {
-                saveToFile();
-                return "Book is already in library!";
-            }
+            bookToReturn.IsBorrowed = false;
 
-            else
-            {
-                bookToReturn.IsBorrowed = false;
-                saveToFile();
-                return "Borrowed!";
-            }
+            saveToFile();
+            return true;
 
         }
         public ObservableCollection<Book> GetBooks() {
@@ -94,17 +82,15 @@ namespace LibraryManagementSystem
 
         private void loadFromFile()
         {
-            if (File.Exists(filePath))
-            {
-                var json = File.ReadAllText(filePath);
-                var loadedBooks = JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
+            if (!File.Exists(filePath)) return;
+            
+            var json = File.ReadAllText(filePath);
+            
+            var loadedBooks = JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
 
-                if (loadedBooks != null) {
-                    books = loadedBooks;
-                }
-            }
-            if (books.Any())
+            if (loadedBooks != null)
             {
+                books = loadedBooks;
                 nextId = books.Max(b => b.Id) + 1;
             }
         }
