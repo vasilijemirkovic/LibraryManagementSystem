@@ -7,11 +7,11 @@ using System.ComponentModel;
 
 namespace LibraryManagementSystem
 {
-    internal class Book : INotifyPropertyChanged
+    public class Book : INotifyPropertyChanged
     {
-        public int Id { get; private set; }
-        public string Title { get; private set; }
-        public string Author { get; private set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
 
         private bool isBorrowed;
         public string Status => IsBorrowed ? "NO" : "YES";
