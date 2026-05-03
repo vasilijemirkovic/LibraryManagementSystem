@@ -47,22 +47,15 @@ namespace LibraryManagementSystem
             }
         }
 
-        public string borrowBook(int Id)
+        public bool borrowBook(int Id)
         {
             var bookToBorrow = books.FirstOrDefault(b => b.Id == Id);
 
-            if (bookToBorrow == null)
-            {
-                saveToFile();
-                return "Not found!";
-            }
+            if (bookToBorrow == null || bookToBorrow.IsBorrowed) return false;
 
-            else
-            {
-                bookToBorrow.IsBorrowed = true;
-                saveToFile();
-                return "Borrowed!";
-            }
+            bookToBorrow.IsBorrowed = true;
+            saveToFile();
+            return true;
         }
 
         public string returnBook(int Id)
