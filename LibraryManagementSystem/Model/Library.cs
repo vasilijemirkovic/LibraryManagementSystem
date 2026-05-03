@@ -26,7 +26,8 @@ namespace LibraryManagementSystem
             saveToFile();
         }
 
-        public bool removeBook(int Id) {
+        public bool removeBook(int Id)
+        {
             var bookToDelete = books.FirstOrDefault(b => b.Id == Id);
 
             if (bookToDelete == null) return false;
@@ -34,17 +35,6 @@ namespace LibraryManagementSystem
             books.Remove(bookToDelete);
             saveToFile();
             return true;
-        }
-        public void showBooks()
-        {
-            foreach (var eachBook in books)
-            {
-                Console.WriteLine("Id: "
-                    + eachBook.Id + ", name: "
-                    + eachBook.Title + ", author: "
-                    + eachBook.Author + ", available: " +
-                    (eachBook.IsBorrowed ? "NO" : "YES"));
-            }
         }
 
         public bool borrowBook(int Id)
