@@ -31,7 +31,15 @@ namespace LibraryManagementSystem
         }
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text))
+            {
+                MessageBox.Show("Please enter both title and author!");
+                return;
+            }
+
             mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
+            TitleBox.Text = "";
+            AuthorBox.Text = "";
         }
 
         private void DeleteBook_Click(object sender, RoutedEventArgs e) {
