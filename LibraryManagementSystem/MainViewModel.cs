@@ -59,14 +59,14 @@ namespace LibraryManagementSystem
             library.removeBook(id);
         }
 
-        public void BorrowBook(int id)
+        public bool BorrowBook(int id)
         {
-            library.borrowBook(id);
+            return library.borrowBook(id);
         }
 
-        public void ReturnBook(int id)
+        public bool ReturnBook(int id)
         {
-            library.returnBook(id);
+            return library.returnBook(id);
         }
 
         public void Search(string search)
