@@ -9,35 +9,56 @@ namespace LibraryManagementSystem
 {
     public class Book : INotifyPropertyChanged
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-
-        private bool isBorrowed;
-        public string Status => IsBorrowed ? "NO" : "YES";
-
-
-
-        public Book(int id, string title, string author)
-        {
-            this.Id = id;
-            this.Title = title;
-            this.Author = author;
-            isBorrowed = false;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private int id;
+        public int Id
+        {
+            get => id;
+            set { id = value; OnPropertyChanged(nameof(Id)); }
+        }
+
+        private string title = "";
+        public string Title
+        {
+            get => title;
+            set { title = value; OnPropertyChanged(nameof(Title)); }
+        }
+
+        private string author = "";
+        public string Author
+        {
+            get => author;
+            set { author = value; OnPropertyChanged(nameof(Author)); }
+        }
+
+        private bool isBorrowed;
         public bool IsBorrowed
         {
-            get => this.isBorrowed;
+            get => isBorrowed;
             set
             {
                 isBorrowed = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBorrowed)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Status)));
+                OnPropertyChanged(nameof(IsBorrowed));
+                OnPropertyChanged(nameof(Status));
             }
         }
 
+        public string Status => IsBorrowed ? "NO" : "YES";
+
+        public Book() { }
+
+        public Book(int id, string title, string author)
+        {
+            Id = id;
+            Title = title;
+            Author = author;
+            IsBorrowed = false;
+        }
     }
 }
