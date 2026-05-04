@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace LibraryManagementSystem
 {
@@ -10,33 +9,61 @@ namespace LibraryManagementSystem
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly Library library = new Library();
-        public Book SelectedBook {  get; set; }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        public ObservableCollection<Book> FilteredBooks { get; set; }
+        public ObservableCollection<Book> filteredBooks;
 
-        public ObservableCollection<Book> Books { get; set; }
+        public ObservableCollection<Book> FilteredBooks
+        {
+            get => filteredBooks;
+            set
+            {
+                filteredBooks = value;
+                OnPropertyChanged(nameof(FilteredBooks));
+            }
+        }
+        public ObservableCollection<Book> Books => library.GetBooks();
 
+        private Book selectedBook;
+        public Book SelectedBook
+        {
+            get => selectedBook;
+            set
+            {
+                selectedBook = value;
+                OnPropertyChanged(nameof(SelectedBook));
+            }
+        }
         public MainViewModel()
         {
-            Books = library.GetBooks();
-            FilteredBooks = new ObservableCollection<Book>(Books);
+            filteredBooks = new ObservableCollection<Book>(Books);
+            Books.CollectionChanged += (s, e) => Search(_lastSearch);
         }
-        public ObservableCollection<Book> GetBooks()
-        {
-            return Books;
-        }
+
+        private string _lastSearch = "";
+
         public void AddBook(string title, string author)
         {
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
+            {
+                return;
+            }
             library.addBook(title, author);
         }
+
         public void RemoveBook(int id)
         {
             library.removeBook(id);
         }
+
         public void BorrowBook(int id)
         {
             library.borrowBook(id);
         }
+
         public void ReturnBook(int id)
         {
             library.returnBook(id);
@@ -44,20 +71,20 @@ namespace LibraryManagementSystem
 
         public void Search(string search)
         {
-            if (string.IsNullOrWhiteSpace(search))
+            _lastSearch = search ?? "";
+
+            if (string.IsNullOrWhiteSpace(_lastSearch))
             {
                 FilteredBooks = new ObservableCollection<Book>(Books);
+                return;
             }
-            else
-            {
-                var filtered = Books
-                    .Where(b => b.Title.ToLower().Contains(search.ToLower())
-                             || b.Author.ToLower().Contains(search.ToLower()));
 
-                FilteredBooks = new ObservableCollection<Book>(filtered);
-            }
+            var lower = _lastSearch.ToLower();
+            var filtered = Books.Where(b =>
+                b.Title.ToLower().Contains(lower) ||
+                b.Author.ToLower().Contains(lower));
+
+            FilteredBooks = new ObservableCollection<Book>(filtered);
         }
-
-
     }
 }
