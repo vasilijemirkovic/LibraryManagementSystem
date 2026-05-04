@@ -54,40 +54,28 @@ namespace LibraryManagementSystem
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e) {
 
-            var selected = mainViewModel.SelectedBook;
-
-            if (selected == null)
+            if (mainViewModel.SelectedBook == null)
             {
                 MessageBox.Show("Select a book first!");
                 return;
             }
 
-            if (selected.IsBorrowed)
-            {
-                MessageBox.Show("The book is already borrowed!");
-                return;
-            }
+            bool success = mainViewModel.BorrowBook(mainViewModel.SelectedBook.Id);
 
-            mainViewModel.BorrowBook(selected.Id);
+            if (!success) MessageBox.Show("The book is already borrowed!");
         }
 
         private void ReturnBook_Click(object sender, RoutedEventArgs e)
         {
-            var selected = mainViewModel.SelectedBook;
-
-            if (selected == null)
+            if (mainViewModel.SelectedBook == null)
             {
                 MessageBox.Show("Select a book first!");
                 return;
             }
 
-            if (!selected.IsBorrowed)
-            {
-                MessageBox.Show("The book is already returned!");
-                return;
-            }
+            bool success = mainViewModel.ReturnBook(mainViewModel.SelectedBook.Id);
 
-            mainViewModel.ReturnBook(selected.Id);
+            if (!success) MessageBox.Show("The book is already returned!");
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) {
