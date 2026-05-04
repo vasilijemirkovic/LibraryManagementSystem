@@ -19,7 +19,7 @@
 
         <TextBox x:Name="SearchBox" Margin="5" TextChanged="SearchBox_TextChanged"/>
 
-        <DataGrid ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding FilteredBooks}" SelectedItem="{Binding SelectedBook}" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" SortMemberPath="Id" />
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" SortMemberPath="Title" />
