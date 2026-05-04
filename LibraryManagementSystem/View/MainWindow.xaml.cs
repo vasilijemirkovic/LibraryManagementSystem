@@ -41,18 +41,17 @@ namespace LibraryManagementSystem
             TitleBox.Text = "";
             AuthorBox.Text = "";
         }
-
-        private void DeleteBook_Click(object sender, RoutedEventArgs e) {
-
-
-            var selected = mainViewModel.SelectedBook;
-
-            if (selected == null) {
+        private void DeleteBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainViewModel.SelectedBook == null)
+            {
                 MessageBox.Show("Select a book first!");
                 return;
             }
-            mainViewModel.RemoveBook(selected.Id);
+
+            mainViewModel.RemoveBook(mainViewModel.SelectedBook.Id);
         }
+
         private void BorrowBook_Click(object sender, RoutedEventArgs e) {
 
             var selected = mainViewModel.SelectedBook;
