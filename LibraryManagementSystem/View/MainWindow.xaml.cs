@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem.View;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -41,6 +42,27 @@ namespace LibraryManagementSystem
             TitleBox.Text = "";
             AuthorBox.Text = "";
         }
+
+        private void EditBook_Click(object sender, RoutedEventArgs e)
+        {
+            if (mainViewModel.SelectedBook == null)
+            {
+                MessageBox.Show("Select a book first!");
+                return;
+            }
+
+            var selected = mainViewModel.SelectedBook;
+            var editWindow = new EditBookWindow(selected.Title, selected.Author);
+            editWindow.Owner = this;
+
+            if(editWindow.ShowDialog() == true)
+            {
+                bool success = mainViewModel.EditBook(selected.Id, editWindow.NewTitle, editWindow.NewAuthor);
+
+                if (!success) MessageBox.Show("Failed to edit book!");
+            }
+        }
+
         private void DeleteBook_Click(object sender, RoutedEventArgs e)
         {
             if (mainViewModel.SelectedBook == null)
