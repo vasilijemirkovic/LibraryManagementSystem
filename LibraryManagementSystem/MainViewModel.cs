@@ -86,5 +86,11 @@ namespace LibraryManagementSystem
 
             FilteredBooks = new ObservableCollection<Book>(filtered);
         }
+        public bool EditBook(int id, string newTitle, string newAuthor)
+        {
+            if (string.IsNullOrWhiteSpace(newTitle) || string.IsNullOrWhiteSpace(newAuthor)) return false;
+
+            return library.EditBook(id, newTitle, newAuthor);
+        }
     }
 }
