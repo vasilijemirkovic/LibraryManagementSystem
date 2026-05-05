@@ -84,5 +84,16 @@ namespace LibraryManagementSystem
                 nextId = books.Max(b => b.Id) + 1;
             }
         }
+
+        public bool EditBook(int id, string newTitle, string newAuthor)
+        {
+            var book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null) return false;
+
+            book.Title = newTitle;
+            book.Author = newAuthor;
+            saveToFile();
+            return true;
+        }
     }
 }
