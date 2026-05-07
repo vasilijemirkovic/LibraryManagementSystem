@@ -32,13 +32,18 @@ namespace LibraryManagementSystem
         }
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text))
-            {
+            if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text)) {
                 MessageBox.Show("Please enter both title and author!");
                 return;
             }
 
-            mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
+            bool bookAdded = mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
+
+            if (!bookAdded) {
+                MessageBox.Show("This book already exists!");
+                return;
+            }
+
             TitleBox.Text = "";
             AuthorBox.Text = "";
         }
