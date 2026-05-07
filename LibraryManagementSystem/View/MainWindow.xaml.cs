@@ -71,7 +71,13 @@ namespace LibraryManagementSystem
                 return;
             }
 
-            mainViewModel.RemoveBook(mainViewModel.SelectedBook.Id);
+            var selected = mainViewModel.SelectedBook;
+            var result = MessageBox.Show($"Are you sure you want to delete '{selected.Title}' by {selected.Author}?",
+                "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes) {
+                mainViewModel.RemoveBook(mainViewModel.SelectedBook.Id);
+            }
         }
 
         private void BorrowBook_Click(object sender, RoutedEventArgs e) {
