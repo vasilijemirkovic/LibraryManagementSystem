@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.IO;
+using System.Windows;
 
 
 namespace LibraryManagementSystem
@@ -20,10 +21,15 @@ namespace LibraryManagementSystem
             loadFromFile();
         }
 
-        public void addBook(string title, string author) {
+        public bool addBook(string title, string author) {
+
+            bool duplicate = books.Any(book => book.Title.ToLower() == title.ToLower() && book.Author.ToLower() == author.ToLower());
+            if (duplicate) return false;
+            
             books.Add(new Book(nextId, title, author));
             nextId++;
             saveToFile();
+            return true;
         }
 
         public bool removeBook(int Id)
