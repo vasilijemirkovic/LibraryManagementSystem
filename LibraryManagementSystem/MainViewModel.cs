@@ -45,13 +45,12 @@ namespace LibraryManagementSystem
 
         private string _lastSearch = "";
 
-        public void AddBook(string title, string author)
+        public bool AddBook(string title, string author)
         {
-            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
-            {
-                return;
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author)){
+                return false;
             }
-            library.addBook(title, author);
+            return library.addBook(title, author);
         }
 
         public void RemoveBook(int id)
