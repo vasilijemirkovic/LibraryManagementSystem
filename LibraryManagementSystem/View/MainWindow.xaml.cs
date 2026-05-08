@@ -24,11 +24,36 @@ namespace LibraryManagementSystem
     {
         private MainViewModel mainViewModel;
 
-        public MainWindow()
-        {
+        public MainWindow() {
             InitializeComponent();
             mainViewModel = new MainViewModel();
             DataContext = mainViewModel;
+
+            SetPlaceholder(TitleBox, "Title");
+            SetPlaceholder(AuthorBox, "Author");
+            SetPlaceholder(SearchBox, "Search...");
+        }
+
+        private void SetPlaceholder(TextBox textBox, string placeholder) {
+
+            textBox.GotFocus += (s, e) => {
+                if (textBox.Text == placeholder) {
+                    textBox.Text = "";
+                    textBox.Foreground = System.Windows.Media.Brushes.Black;
+                }
+            };
+
+            textBox.LostFocus += (s, e) => {
+                if (string.IsNullOrWhiteSpace(textBox.Text)) {
+                    textBox.Text = placeholder;
+                    textBox.Foreground = System.Windows.Media.Brushes.Gray;
+                }
+            };
+
+            if (string.IsNullOrWhiteSpace(textBox.Text)) {
+                textBox.Text = placeholder;
+                textBox.Foreground = System.Windows.Media.Brushes.Gray;
+            }
         }
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
@@ -112,6 +137,8 @@ namespace LibraryManagementSystem
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) {
+            if (SearchBox.Text == "Search...") return;
+
             mainViewModel.Search(SearchBox.Text);
         }
     }
