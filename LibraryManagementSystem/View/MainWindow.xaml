@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagementSystem"
         mc:Ignorable="d"
-        Title="Library Management System" Height="600" Width="900">
-    
-        <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
+        Title="Library Management System" Height="600" Width="900"
+        Background="#1E1E2E">
+
+
+    <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
 
         <TextBox x:Name="TitleBox" Margin="5"/>
         <TextBox x:Name="AuthorBox" Margin="5"/>
