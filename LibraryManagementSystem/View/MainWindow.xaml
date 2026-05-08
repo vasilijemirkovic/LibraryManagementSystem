@@ -9,8 +9,8 @@
 
     <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
 
-        <TextBox x:Name="TitleBox" Margin="5" />
-        <TextBox x:Name="AuthorBox" Margin="5" />
+        <TextBox x:Name="TitleBox" Margin="5"/>
+        <TextBox x:Name="AuthorBox" Margin="5"/>
 
         <Button Content="Add Book" Click="AddBook_Click" Margin="5"/>
         <Button Content="Edit Book" Click="EditBook_Click" Margin="5"/>
