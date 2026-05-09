@@ -41,6 +41,16 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#2E2E3E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#4C9BE8"/>
+            <Setter Property="RowBackground" Value="#2E2E3E"/>
+            <Setter Property="AlternatingRowBackground" Value="#3A3A4E"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+        </Style>
         
     </Window.Resources>
 
