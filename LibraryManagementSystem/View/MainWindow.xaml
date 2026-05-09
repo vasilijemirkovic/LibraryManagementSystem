@@ -52,7 +52,6 @@
             <Setter Property="HeadersVisibility" Value="Column"/>
         </Style>
 
-
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#4C9BE8"/>
             <Setter Property="Foreground" Value="White"/>
@@ -60,13 +59,26 @@
             <Setter Property="Padding" Value="8,5"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        
-        
 
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        
     </Window.Resources>
 
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
+    </Grid>
+
+
+        <StackPanel Margin="10,0,10,10" Height="414" VerticalAlignment="Bottom">
 
         <TextBox x:Name="TitleBox" Margin="5"/>
         <TextBox x:Name="AuthorBox" Margin="5"/>
