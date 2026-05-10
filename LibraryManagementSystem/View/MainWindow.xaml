@@ -108,6 +108,18 @@
             <ComboBoxItem Content="Borrowed"/>
         </ComboBox>
 
+        <DataGrid Grid.Row="3" ItemsSource="{Binding FilteredBooks}"
+            SelectedItem="{Binding SelectedBook}"
+            AutoGenerateColumns="False"
+            CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*"/>
+                <DataGridTextColumn Header="Available" Binding="{Binding Status}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
 
 
                 </Grid>
