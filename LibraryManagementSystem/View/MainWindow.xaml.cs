@@ -110,36 +110,33 @@ namespace LibraryManagementSystem
             }
         }
 
-        private void BorrowBook_Click(object sender, RoutedEventArgs e) {
-
-            if (mainViewModel.SelectedBook == null)
-            {
+        private void BorrowReturn_Click(object sender, RoutedEventArgs e){
+            if (mainViewModel.SelectedBook == null) {
                 MessageBox.Show("Select a book first!");
                 return;
             }
 
-            bool success = mainViewModel.BorrowBook(mainViewModel.SelectedBook.Id);
+            var selected = mainViewModel.SelectedBook;
 
-            if (!success) MessageBox.Show("The book is already borrowed!");
-        }
-
-        private void ReturnBook_Click(object sender, RoutedEventArgs e)
-        {
-            if (mainViewModel.SelectedBook == null)
-            {
-                MessageBox.Show("Select a book first!");
-                return;
+            if (selected.IsBorrowed) {
+                mainViewModel.ReturnBook(selected.Id);
             }
-
-            bool success = mainViewModel.ReturnBook(mainViewModel.SelectedBook.Id);
-
-            if (!success) MessageBox.Show("The book is already returned!");
+            else {
+                mainViewModel.BorrowBook(selected.Id);
+            }
         }
+
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) {
             if (SearchBox.Text == "Search...") return;
 
             mainViewModel.Search(SearchBox.Text);
+        }
+
+        private void StatusFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = (StatusFilter.SelectedItem as ComboBoxItem)?.Content?.ToString();
+            mainViewModel.Search(SearchBox.Text, selected);
         }
     }
 }
