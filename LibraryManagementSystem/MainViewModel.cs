@@ -68,7 +68,7 @@ namespace LibraryManagementSystem
             return library.returnBook(id);
         }
 
-        public void Search(string search)
+        public void Search(string search, string status = null)
         {
             _lastSearch = search ?? "";
 
