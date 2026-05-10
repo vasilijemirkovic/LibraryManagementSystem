@@ -87,7 +87,7 @@
             </Grid.ColumnDefinitions>
             <TextBox x:Name="TitleBox" Grid.Column="0" Margin="0,0,10,0"/>
             <TextBox x:Name="AuthorBox" Grid.Column="1" Margin="0,0,10,0"/>
-            <Button Grid.Column="2" Content="Add Book" Width="100" Click="AddBook_Click"
+            <Button Grid.Column="2" Content="Add Book" Width="100" Click="AddBook_Click"/>
         </Grid>
             
         <Grid Grid.Row="2" Margin="0,0,0,10">
