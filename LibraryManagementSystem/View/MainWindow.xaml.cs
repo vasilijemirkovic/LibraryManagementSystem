@@ -135,6 +135,7 @@ namespace LibraryManagementSystem
 
         private void StatusFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (mainViewModel == null) return;
             var selected = (StatusFilter.SelectedItem as ComboBoxItem)?.Content?.ToString();
             mainViewModel.Search(SearchBox.Text, selected);
         }
