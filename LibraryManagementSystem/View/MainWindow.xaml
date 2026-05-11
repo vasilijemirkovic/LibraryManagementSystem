@@ -41,6 +41,11 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
+        
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2E2E3E"/>
+        </Style>
 
         <Style TargetType="DataGrid">
             <Setter Property="Background" Value="#2E2E3E"/>
