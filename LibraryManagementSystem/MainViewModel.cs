@@ -93,6 +93,8 @@ namespace LibraryManagementSystem
         {
             if (string.IsNullOrWhiteSpace(newTitle) || string.IsNullOrWhiteSpace(newAuthor)) return false;
 
+            if(newTitle.Length > 70 || newAuthor.Length > 70) return false;
+
             return library.EditBook(id, newTitle, newAuthor);
         }
     }
