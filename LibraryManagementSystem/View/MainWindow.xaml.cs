@@ -39,7 +39,7 @@ namespace LibraryManagementSystem
             textBox.GotFocus += (s, e) => {
                 if (textBox.Text == placeholder) {
                     textBox.Text = "";
-                    textBox.Foreground = System.Windows.Media.Brushes.Black;
+                    textBox.Foreground = Brushes.White;
                 }
             };
 
