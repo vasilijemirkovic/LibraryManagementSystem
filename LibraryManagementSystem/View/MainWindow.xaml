@@ -113,6 +113,18 @@
                   SelectedItem="{Binding SelectedBook}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsBorrowed}" Value="True">
+                            <Setter Property="Foreground" Value="#FF6B6B"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsBorrowed}" Value="False">
+                            <Setter Property="Foreground" Value="#6BFF8E"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
