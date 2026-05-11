@@ -69,6 +69,11 @@ namespace LibraryManagementSystem
                 return;
             }
 
+            if(TitleBox.Text.Length > 70 || AuthorBox.Text.Length > 70) {
+                MessageBox.Show("Title and author cannot exceed 70 characters!");
+                return;
+            }
+
             TitleBox.Text = "";
             AuthorBox.Text = "";
         }
