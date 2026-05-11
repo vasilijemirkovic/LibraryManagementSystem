@@ -9,6 +9,10 @@ namespace LibraryManagementSystem
         public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly Library library = new Library();
+
+        private string _lastSearch = "";
+        private string _lastStatus = "All";
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -43,8 +47,6 @@ namespace LibraryManagementSystem
             Books.CollectionChanged += (s, e) => Search(_lastSearch);
         }
 
-        private string _lastSearch = "";
-
         public bool AddBook(string title, string author)
         {
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author)){
@@ -75,17 +77,22 @@ namespace LibraryManagementSystem
         public void Search(string search, string status = null)
         {
             _lastSearch = search ?? "";
+            _lastStatus = status ?? _lastStatus;
 
-            if (string.IsNullOrWhiteSpace(_lastSearch))
+            var filtered = Books.AsEnumerable();
+
+            if (!string.IsNullOrWhiteSpace(_lastSearch))
             {
-                FilteredBooks = new ObservableCollection<Book>(Books);
-                return;
+                var lower = _lastSearch.ToLower();
+                filtered = filtered.Where(b =>
+                    b.Title.ToLower().Contains(lower) ||
+                    b.Author.ToLower().Contains(lower));
             }
 
-            var lower = _lastSearch.ToLower();
-            var filtered = Books.Where(b =>
-                b.Title.ToLower().Contains(lower) ||
-                b.Author.ToLower().Contains(lower));
+            if (_lastStatus == "Available")
+                filtered = filtered.Where(b => !b.IsBorrowed);
+            else if (_lastStatus == "Borrowed")
+                filtered = filtered.Where(b => b.IsBorrowed);
 
             FilteredBooks = new ObservableCollection<Book>(filtered);
         }
