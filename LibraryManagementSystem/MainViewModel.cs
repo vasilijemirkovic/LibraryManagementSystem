@@ -50,6 +50,10 @@ namespace LibraryManagementSystem
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author)){
                 return false;
             }
+            if (title.Length > 70 || author.Length > 70)
+            {
+                return false;
+            }
             return library.addBook(title, author);
         }
 
