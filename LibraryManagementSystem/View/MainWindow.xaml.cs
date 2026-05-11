@@ -1,19 +1,8 @@
 ﻿using LibraryManagementSystem.View;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace LibraryManagementSystem
 {
@@ -46,13 +35,13 @@ namespace LibraryManagementSystem
             textBox.LostFocus += (s, e) => {
                 if (string.IsNullOrWhiteSpace(textBox.Text)) {
                     textBox.Text = placeholder;
-                    textBox.Foreground = System.Windows.Media.Brushes.Gray;
+                    textBox.Foreground = Brushes.Gray;
                 }
             };
 
             if (string.IsNullOrWhiteSpace(textBox.Text)) {
                 textBox.Text = placeholder;
-                textBox.Foreground = System.Windows.Media.Brushes.Gray;
+                textBox.Foreground = Brushes.Gray;
             }
         }
         private void AddBook_Click(object sender, RoutedEventArgs e)
