@@ -131,7 +131,7 @@ namespace LibraryManagementSystem
         {
             if (mainViewModel == null) return;
             var selected = (StatusFilter.SelectedItem as ComboBoxItem)?.Content?.ToString();
-            string searchText = SearchBox.Text == "Search ..." ? "" : SearchBox.Text;
+            string searchText = SearchBox.Text == "Search..." ? "" : SearchBox.Text;
             mainViewModel.Search(searchText, selected);
         }
     }
