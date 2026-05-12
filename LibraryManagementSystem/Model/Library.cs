@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -13,12 +14,15 @@ namespace LibraryManagementSystem
 {
     internal class Library
     {
-        private int nextId = 1;
-        private readonly string filePath = "books.json";
-        private ObservableCollection<Book> books = new ObservableCollection<Book>();
+
+        private readonly LibraryContext context;
+        private ObservableCollection<Book> books;
+
 
         public Library() {
-            loadFromFile();
+            context = new LibraryContext();
+            context.Database.EnsureCreated();
+            books = new ObservableCollection<Book>(context.Books.ToList());
         }
 
         public bool addBook(string title, string author) {
