@@ -76,27 +76,6 @@ namespace LibraryManagementSystem
             return books;
         }
 
-        private void saveToFile()
-        {
-            var json = JsonSerializer.Serialize(books);
-            File.WriteAllText(filePath, json);
-        }
-
-        private void loadFromFile()
-        {
-            if (!File.Exists(filePath)) return;
-            
-            var json = File.ReadAllText(filePath);
-            
-            var loadedBooks = JsonSerializer.Deserialize<ObservableCollection<Book>>(json);
-
-            if (loadedBooks != null)
-            {
-                books = loadedBooks;
-                nextId = books.Max(b => b.Id) + 1;
-            }
-        }
-
         public bool EditBook(int id, string newTitle, string newAuthor)
         {
             var book = books.FirstOrDefault(b => b.Id == id);
