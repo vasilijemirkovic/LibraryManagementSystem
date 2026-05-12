@@ -78,12 +78,12 @@ namespace LibraryManagementSystem
 
         public bool EditBook(int id, string newTitle, string newAuthor)
         {
-            var book = books.FirstOrDefault(b => b.Id == id);
-            if (book == null) return false;
+            var bookToEdit = books.FirstOrDefault(b => b.Id == id);
+            if (bookToEdit == null) return false;
 
-            book.Title = newTitle;
-            book.Author = newAuthor;
-            saveToFile();
+            bookToEdit.Title = newTitle;
+            bookToEdit.Author = newAuthor;
+            context.SaveChanges();
             return true;
         }
     }
