@@ -30,10 +30,10 @@ namespace LibraryManagementSystem
             bool duplicate = books.Any(book => book.Title.ToLower() == title.ToLower() && book.Author.ToLower() == author.ToLower());
             if (duplicate) return false;
 
-            var book = new Book { Title = title, Author = author };
-            context.Books.Add(book);
+            var bookToAdd = new Book { Title = title, Author = author };
+            context.Books.Add(bookToAdd);
             context.SaveChanges();
-            books.Add(book);
+            books.Add(bookToAdd);
             return true;
         }
 
@@ -43,8 +43,9 @@ namespace LibraryManagementSystem
 
             if (bookToDelete == null) return false;
 
+            context.Books.Remove(bookToDelete);
+            context.SaveChanges();
             books.Remove(bookToDelete);
-            saveToFile();
             return true;
         }
 
