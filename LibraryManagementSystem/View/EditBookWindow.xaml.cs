@@ -7,8 +7,8 @@ namespace LibraryManagementSystem.View
     /// </summary>
     public partial class EditBookWindow : Window
     {
-        public string NewTitle { get; private set; }
-        public string NewAuthor { get; private set; }
+        public string? NewTitle { get; private set; }
+        public string? NewAuthor { get; private set; }
         public EditBookWindow(string currentTitle, string currentAuthor)
         {
             InitializeComponent();
