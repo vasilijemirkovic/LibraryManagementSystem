@@ -31,8 +31,8 @@ namespace LibraryManagementSystem
         }
         public ObservableCollection<Book> Books => library.GetBooks();
 
-        private Book selectedBook;
-        public Book SelectedBook
+        private Book? selectedBook;
+        public Book? SelectedBook
         {
             get => selectedBook;
             set
@@ -74,7 +74,7 @@ namespace LibraryManagementSystem
             return library.returnBook(id);
         }
 
-        public void Search(string search, string status = null)
+        public void Search(string search, string? status = null)
         {
             _lastSearch = search ?? "";
             _lastStatus = status ?? _lastStatus;
