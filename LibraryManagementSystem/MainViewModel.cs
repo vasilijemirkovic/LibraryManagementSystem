@@ -6,7 +6,7 @@ namespace LibraryManagementSystem
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private readonly Library library = new Library();
 
