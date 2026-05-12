@@ -29,10 +29,11 @@ namespace LibraryManagementSystem
 
             bool duplicate = books.Any(book => book.Title.ToLower() == title.ToLower() && book.Author.ToLower() == author.ToLower());
             if (duplicate) return false;
-            
-            books.Add(new Book(nextId, title, author));
-            nextId++;
-            saveToFile();
+
+            var book = new Book { Title = title, Author = author };
+            context.Books.Add(book);
+            context.SaveChanges();
+            books.Add(book);
             return true;
         }
 
