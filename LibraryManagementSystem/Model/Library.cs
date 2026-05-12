@@ -68,7 +68,7 @@ namespace LibraryManagementSystem
 
             bookToReturn.IsBorrowed = false;
 
-            saveToFile();
+            context.SaveChanges();
             return true;
 
         }
