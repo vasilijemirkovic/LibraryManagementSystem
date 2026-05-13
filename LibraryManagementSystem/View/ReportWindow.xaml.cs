@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,15 @@ namespace LibraryManagementSystem.View
     /// </summary>
     public partial class ReportWindow : Window
     {
-        public ReportWindow()
+        public ReportWindow(ObservableCollection<Book> books)
         {
             InitializeComponent();
+            LoadReport(books);
+        }
+
+        private void LoadReport(ObservableCollection<Book> books)
+        {
+            throw new NotImplementedException();
         }
     }
 }
