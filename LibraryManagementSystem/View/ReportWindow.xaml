@@ -31,6 +31,13 @@
                                HorizontalAlignment="Center"/>
                     <TextBlock Text="Total" HorizontalAlignment="Center"/>
                 </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock x:Name="AvailableCount" Text="0" FontSize="32"
+                               FontWeight="Bold" Foreground="#6BFF8E"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Available" HorizontalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Border>
 
