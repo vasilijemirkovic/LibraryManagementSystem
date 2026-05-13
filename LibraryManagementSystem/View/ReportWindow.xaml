@@ -24,6 +24,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock x:Name="TotalCount" Text="0" FontSize="32"
+                               FontWeight="Bold" Foreground="#4C9BE8"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Total" HorizontalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Border>
 
