@@ -20,8 +20,7 @@ namespace LibraryManagementSystem.View
     /// </summary>
     public partial class ReportWindow : Window
     {
-        public ReportWindow(ObservableCollection<Book> books)
-        {
+        public ReportWindow(ObservableCollection<Book> books) {
             InitializeComponent();
             LoadReport(books);
         }
@@ -36,8 +35,7 @@ namespace LibraryManagementSystem.View
             AvailableCount.Text = availableBooks.ToString();
             BorrowedCount.Text = borrowedBooks.ToString();
 
-            if (total == 0)
-            {
+            if (total == 0) {
                 AvailablePercent.Text = "0%";
                 BorrowedPercent.Text = "0%";
                 return;
@@ -51,9 +49,6 @@ namespace LibraryManagementSystem.View
 
             AvailableBar.Width = availableRatio * 340;
             BorrowedBar.Width = borrowedRatio * 340;
-
-
-
         }
     }
 }
