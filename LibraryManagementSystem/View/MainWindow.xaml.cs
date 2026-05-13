@@ -134,5 +134,11 @@ namespace LibraryManagementSystem
             string searchText = SearchBox.Text == "Search..." ? "" : SearchBox.Text;
             mainViewModel.Search(searchText, selected);
         }
+        private void Report_Click(object sender, RoutedEventArgs e)
+        {
+            var reportWindow = new ReportWindow(mainViewModel.Books);
+            reportWindow.Owner = this;
+            reportWindow.ShowDialog();
+        }
     }
 }
