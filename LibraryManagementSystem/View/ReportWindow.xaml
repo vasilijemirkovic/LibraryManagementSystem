@@ -38,6 +38,13 @@
                                HorizontalAlignment="Center"/>
                     <TextBlock Text="Available" HorizontalAlignment="Center"/>
                 </StackPanel>
+
+                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                    <TextBlock x:Name="BorrowedCount" Text="0" FontSize="32"
+                               FontWeight="Bold" Foreground="#FF6B6B"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Borrowed" HorizontalAlignment="Center"/>
+                </StackPanel>
             </Grid>
         </Border>
 
