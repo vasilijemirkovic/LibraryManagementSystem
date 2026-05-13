@@ -108,8 +108,8 @@
             <Button Grid.Column="1" Content="Delete Book" Width="100" Margin="0,0,10,0" Click="DeleteBook_Click"/>
             <Button Grid.Column="2" Content="Borrow / Return" Width="120" Margin="0,0,10,0" Click="BorrowReturn_Click"/>
             <Button Grid.Column="3" Content="Report" Width="100" Margin="0,0,10,0" Click="Report_Click"/>
-            <TextBox x:Name="SearchBox" Grid.Column="3" Margin="0,0,10,0" TextChanged="SearchBox_TextChanged"/>
-            <ComboBox x:Name="StatusFilter" Grid.Column="4" SelectionChanged="StatusFilter_SelectionChanged">
+            <TextBox x:Name="SearchBox" Grid.Column="4" Margin="0,0,10,0" TextChanged="SearchBox_TextChanged"/>
+            <ComboBox x:Name="StatusFilter" Grid.Column="5" SelectionChanged="StatusFilter_SelectionChanged">
                 <ComboBoxItem Content="All" IsSelected="True"/>
                 <ComboBoxItem Content="Available"/>
                 <ComboBoxItem Content="Borrowed"/>
