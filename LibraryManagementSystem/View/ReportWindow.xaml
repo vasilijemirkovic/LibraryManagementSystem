@@ -5,6 +5,7 @@
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Background="#1E1E2E">
+
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
@@ -24,7 +25,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
                     <TextBlock x:Name="TotalCount" Text="0" FontSize="32"
                                FontWeight="Bold" Foreground="#4C9BE8"
@@ -48,6 +49,42 @@
             </Grid>
         </Border>
 
-    </StackPanel>
+        <Border Background="#2E2E3E" CornerRadius="8" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Overview" FontWeight="Bold" Margin="0,0,0,10"/>
 
+                <Grid Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Available"/>
+                    <Border Grid.Column="1" Height="20" CornerRadius="4"
+                    Background="#2E2E3E" Margin="5,0">
+                        <Border x:Name="AvailableBar" HorizontalAlignment="Left"
+                        Height="20" CornerRadius="4" Background="#6BFF8E"/>
+                    </Border>
+                    <TextBlock Grid.Column="2" x:Name="AvailablePercent"
+                       HorizontalAlignment="Right"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Borrowed"/>
+                    <Border Grid.Column="1" Height="20" CornerRadius="4"
+                    Background="#2E2E3E" Margin="5,0">
+                        <Border x:Name="BorrowedBar" HorizontalAlignment="Left"
+                        Height="20" CornerRadius="4" Background="#FF6B6B"/>
+                    </Border>
+                    <TextBlock Grid.Column="2" x:Name="BorrowedPercent"
+                       HorizontalAlignment="Right"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Window>
