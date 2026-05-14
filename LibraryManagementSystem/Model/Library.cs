@@ -68,10 +68,10 @@ namespace LibraryManagementSystem
             if (bookToReturn == null || !bookToReturn.IsBorrowed) return false;
 
             bookToReturn.IsBorrowed = false;
+            bookToReturn.BorrowedDate = null;
 
             context.SaveChanges();
             return true;
-
         }
         public ObservableCollection<Book> GetBooks() {
             return books;
