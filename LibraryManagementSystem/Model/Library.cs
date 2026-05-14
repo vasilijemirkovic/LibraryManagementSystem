@@ -56,6 +56,7 @@ namespace LibraryManagementSystem
             if (bookToBorrow == null || bookToBorrow.IsBorrowed) return false;
 
             bookToBorrow.IsBorrowed = true;
+            bookToBorrow.BorrowedDate = DateTime.Now;
             context.SaveChanges();
             return true;
         }
