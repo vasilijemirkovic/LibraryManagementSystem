@@ -137,6 +137,8 @@
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
                 <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*"/>
                 <DataGridTextColumn Header="Available" Binding="{Binding Status}" Width="100"/>
+                <DataGridTextColumn Header="Borrowed Date" Binding="{Binding BorrowedDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
