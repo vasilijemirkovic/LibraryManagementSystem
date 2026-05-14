@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
 namespace LibraryManagementSystem
 {
@@ -50,6 +51,18 @@ namespace LibraryManagementSystem
         }
 
         public string Status => IsBorrowed ? "NO" : "YES";
+
+        private DateTime? borrowedDate;
+        public DateTime? BorrowedDate
+        {
+            get => borrowedDate;
+            set
+            {
+                borrowedDate = value;
+                OnPropertyChanged(nameof(BorrowedDate));
+                OnPropertyChanged(nameof(DueDate));
+            }
+        }
 
         public Book() { }
 
