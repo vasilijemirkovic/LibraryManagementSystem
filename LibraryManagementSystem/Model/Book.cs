@@ -63,6 +63,7 @@ namespace LibraryManagementSystem
                 OnPropertyChanged(nameof(DueDate));
             }
         }
+        public DateTime? DueDate => BorrowedDate?.AddDays(14);
 
         public Book() { }
 
