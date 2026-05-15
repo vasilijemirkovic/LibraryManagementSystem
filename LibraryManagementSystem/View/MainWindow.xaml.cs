@@ -23,7 +23,8 @@ namespace LibraryManagementSystem
             SetPlaceholder(SearchBox, "Search...");
         }
 
-        private void SetPlaceholder(TextBox textBox, string placeholder) {
+        private void SetPlaceholder(TextBox textBox, string placeholder)
+        {
 
             textBox.GotFocus += (s, e) => {
                 if (textBox.Text == placeholder) {
@@ -44,7 +45,7 @@ namespace LibraryManagementSystem
                 textBox.Foreground = Brushes.Gray;
             }
         }
-        private void AddBook_Click(object sender, RoutedEventArgs e)
+        private async void AddBook_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text)) {
                 MessageBox.Show("Please enter both title and author!");
@@ -56,7 +57,7 @@ namespace LibraryManagementSystem
                 return;
             }
 
-            bool bookAdded = mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
+            bool bookAdded = await mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
 
             if (!bookAdded) {
                 MessageBox.Show("This book already exists!");
@@ -67,7 +68,7 @@ namespace LibraryManagementSystem
             AuthorBox.Text = "";
         }
 
-        private void EditBook_Click(object sender, RoutedEventArgs e)
+        private async void EditBook_Click(object sender, RoutedEventArgs e)
         {
             if (mainViewModel.SelectedBook == null)
             {
@@ -79,18 +80,16 @@ namespace LibraryManagementSystem
             var editWindow = new EditBookWindow(selected.Title, selected.Author);
             editWindow.Owner = this;
 
-            if(editWindow.ShowDialog() == true)
-            {
-                bool success = mainViewModel.EditBook(selected.Id, editWindow.NewTitle, editWindow.NewAuthor);
+            if(editWindow.ShowDialog() == true){
+                bool success = await mainViewModel.EditBook(selected.Id, editWindow.NewTitle!, editWindow.NewAuthor!);
 
                 if (!success) MessageBox.Show("Failed to edit book!");
             }
         }
 
-        private void DeleteBook_Click(object sender, RoutedEventArgs e)
+        private async void DeleteBook_Click(object sender, RoutedEventArgs e)
         {
-            if (mainViewModel.SelectedBook == null)
-            {
+            if (mainViewModel.SelectedBook == null){
                 MessageBox.Show("Select a book first!");
                 return;
             }
@@ -100,11 +99,11 @@ namespace LibraryManagementSystem
                 "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes) {
-                mainViewModel.RemoveBook(mainViewModel.SelectedBook.Id);
+                await mainViewModel.RemoveBook(selected.Id);
             }
         }
 
-        private void BorrowReturn_Click(object sender, RoutedEventArgs e){
+        private async void BorrowReturn_Click(object sender, RoutedEventArgs e){
             if (mainViewModel.SelectedBook == null) {
                 MessageBox.Show("Select a book first!");
                 return;
@@ -113,10 +112,10 @@ namespace LibraryManagementSystem
             var selected = mainViewModel.SelectedBook;
 
             if (selected.IsBorrowed) {
-                mainViewModel.ReturnBook(selected.Id);
+                await mainViewModel.ReturnBook(selected.Id);
             }
             else {
-                mainViewModel.BorrowBook(selected.Id);
+                await mainViewModel.BorrowBook(selected.Id);
             }
         }
 
