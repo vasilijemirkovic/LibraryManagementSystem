@@ -48,31 +48,32 @@ namespace LibraryManagementSystem
         private async void AddBook_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text)) {
-                MessageBox.Show("Please enter both title and author!");
+                Toast.Show("Please enter both title and author!", false);
                 return;
             }
 
             if (TitleBox.Text.Length > 70 || AuthorBox.Text.Length > 70) {
-                MessageBox.Show("Title and author cannot exceed 70 characters!");
+                Toast.Show("Title and author cannot exceed 70 characters!", false);
                 return;
             }
 
             bool bookAdded = await mainViewModel.AddBook(TitleBox.Text, AuthorBox.Text);
 
             if (!bookAdded) {
-                MessageBox.Show("This book already exists!");
+                Toast.Show("This book already exists!", false);
                 return;
             }
 
             TitleBox.Text = "";
             AuthorBox.Text = "";
+            Toast.Show("Book added successfully!");
         }
 
         private async void EditBook_Click(object sender, RoutedEventArgs e)
         {
             if (mainViewModel.SelectedBook == null)
             {
-                MessageBox.Show("Select a book first!");
+                Toast.Show("Select a book first!", false);
                 return;
             }
 
@@ -83,14 +84,16 @@ namespace LibraryManagementSystem
             if(editWindow.ShowDialog() == true){
                 bool success = await mainViewModel.EditBook(selected.Id, editWindow.NewTitle!, editWindow.NewAuthor!);
 
-                if (!success) MessageBox.Show("Failed to edit book!");
+                if (!success) Toast.Show("Failed to edit book!", false);
+                else
+                    Toast.Show("Book edited successfully!");
             }
         }
 
         private async void DeleteBook_Click(object sender, RoutedEventArgs e)
         {
             if (mainViewModel.SelectedBook == null){
-                MessageBox.Show("Select a book first!");
+                Toast.Show("Select a book first!", false);
                 return;
             }
 
@@ -100,12 +103,13 @@ namespace LibraryManagementSystem
 
             if (result == MessageBoxResult.Yes) {
                 await mainViewModel.RemoveBook(selected.Id);
+                Toast.Show("Book deleted successfully!");
             }
         }
 
         private async void BorrowReturn_Click(object sender, RoutedEventArgs e){
             if (mainViewModel.SelectedBook == null) {
-                MessageBox.Show("Select a book first!");
+                Toast.Show("Select a book first!", false);
                 return;
             }
 
@@ -113,12 +117,13 @@ namespace LibraryManagementSystem
 
             if (selected.IsBorrowed) {
                 await mainViewModel.ReturnBook(selected.Id);
+                Toast.Show("Book returned successfully!");
             }
             else {
                 await mainViewModel.BorrowBook(selected.Id);
+                Toast.Show("Book borrowed successfully!");
             }
         }
-
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) {
             if (SearchBox.Text == "Search...") return;
