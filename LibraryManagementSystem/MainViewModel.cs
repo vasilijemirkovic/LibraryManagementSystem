@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿    using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
@@ -47,31 +47,30 @@ namespace LibraryManagementSystem
             Books.CollectionChanged += (s, e) => Search(_lastSearch);
         }
 
-        public bool AddBook(string title, string author)
+        public async Task<bool> AddBook(string title, string author)
         {
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author)){
                 return false;
             }
-            if (title.Length > 70 || author.Length > 70)
-            {
+            if (title.Length > 70 || author.Length > 70){
                 return false;
             }
-            return library.addBook(title, author);
+            return await library.addBook(title, author);
         }
 
-        public void RemoveBook(int id)
+        public async Task<bool> RemoveBook(int id)
         {
-            library.removeBook(id);
+            return await library.removeBook(id);
         }
 
-        public bool BorrowBook(int id)
+        public async Task<bool> BorrowBook(int id)
         {
-            return library.borrowBook(id);
+            return await library.borrowBook(id);
         }
 
-        public bool ReturnBook(int id)
+        public async Task<bool> ReturnBook(int id)
         {
-            return library.returnBook(id);
+            return await library.returnBook(id);
         }
 
         public void Search(string search, string? status = null)
@@ -96,13 +95,13 @@ namespace LibraryManagementSystem
 
             FilteredBooks = new ObservableCollection<Book>(filtered);
         }
-        public bool EditBook(int id, string newTitle, string newAuthor)
+        public async Task<bool> EditBook(int id, string newTitle, string newAuthor)
         {
             if (string.IsNullOrWhiteSpace(newTitle) || string.IsNullOrWhiteSpace(newAuthor)) return false;
 
             if(newTitle.Length > 70 || newAuthor.Length > 70) return false;
 
-            return library.EditBook(id, newTitle, newAuthor);
+            return await library.EditBook(id, newTitle, newAuthor);
         }
     }
 }
