@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LibraryManagementSystem"
+        xmlns:local="clr-namespace:LibraryManagementSystem.View"
         mc:Ignorable="d"
         Title="Library Management System" Height="600" Width="900"
         Background="#1E1E2E">
@@ -142,5 +142,8 @@
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
+        <local:ToastNotification x:Name="Toast" Grid.Row="4" 
+                          HorizontalAlignment="Right" 
+                          Margin="0,10,0,0"/>
     </Grid>
 </Window>
