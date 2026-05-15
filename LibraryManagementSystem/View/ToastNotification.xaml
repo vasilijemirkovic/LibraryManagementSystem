@@ -3,6 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Width="250" Height="50"
              Opacity="0">
+    <UserControl.Resources>
+        <Storyboard x:Key="ShowToast">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.3"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:0.5"
+                             BeginTime="0:0:2.5"/>
+        </Storyboard>
+    </UserControl.Resources>
+
 
     <Grid>
             
