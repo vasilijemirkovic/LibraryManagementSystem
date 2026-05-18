@@ -52,9 +52,15 @@ namespace LibraryManagementSystem.Repository
             await context.SaveChangesAsync();
             return true;
         }
-        public Task<bool> Borrow(int id)
+        public async Task<bool> Borrow(int id)
         {
-            throw new NotImplementedException();
+            var bookToBorrow = books.FirstOrDefault(b => b.Id == id);
+            if (bookToBorrow == null || bookToBorrow.IsBorrowed) return false;
+
+            bookToBorrow.IsBorrowed = true;
+            bookToBorrow.BorrowedDate = DateTime.Now;
+            await context.SaveChangesAsync();
+            return true;
         }
         public ObservableCollection<Book> GetAll()
         {
