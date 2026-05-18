@@ -19,9 +19,18 @@ namespace LibraryManagementSystem.Repository
             books = new ObservableCollection<Book>(context.Books.ToList());
         }
 
-        public Task<bool> Add(Book book)
+        public async Task<bool> Add(Book book)
         {
-            throw new NotImplementedException();
+            bool duplicate = books.Any(b =>
+                b.Title.ToLower() == book.Title.ToLower() &&
+                b.Author.ToLower() == book.Author.ToLower());
+
+            if (duplicate) return false;
+
+            context.Books.Add(book);
+            await context.SaveChangesAsync();
+            books.Add(book);
+            return true;
         }
 
         public Task<bool> Borrow(int id)
@@ -36,7 +45,7 @@ namespace LibraryManagementSystem.Repository
 
         public ObservableCollection<Book> GetAll()
         {
-            throw new NotImplementedException();
+            return books;
         }
 
         public Task<bool> Remove(int id)
