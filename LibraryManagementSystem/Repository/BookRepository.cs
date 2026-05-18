@@ -19,17 +19,17 @@ namespace LibraryManagementSystem.Repository
             books = new ObservableCollection<Book>(context.Books.ToList());
         }
 
-        public async Task<bool> Add(Book book)
+        public async Task<bool> Add(Book bookToAdd)
         {
             bool duplicate = books.Any(b =>
-                b.Title.ToLower() == book.Title.ToLower() &&
-                b.Author.ToLower() == book.Author.ToLower());
+                b.Title.ToLower() == bookToAdd.Title.ToLower() &&
+                b.Author.ToLower() == bookToAdd.Author.ToLower());
 
             if (duplicate) return false;
 
-            context.Books.Add(book);
+            context.Books.Add(bookToAdd);
             await context.SaveChangesAsync();
-            books.Add(book);
+            books.Add(bookToAdd);
             return true;
         }
 
@@ -48,9 +48,15 @@ namespace LibraryManagementSystem.Repository
             return books;
         }
 
-        public Task<bool> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            throw new NotImplementedException();
+            var bookToRemove = books.FirstOrDefault(b => b.Id == id);
+            if (bookToRemove == null) return false;
+
+            context.Books.Remove(bookToRemove);
+            await context.SaveChangesAsync();
+            books.Remove(bookToRemove);
+            return true;
         }
 
         public Task<bool> Return(int id)
