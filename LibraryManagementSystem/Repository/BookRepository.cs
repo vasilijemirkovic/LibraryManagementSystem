@@ -12,6 +12,12 @@ namespace LibraryManagementSystem.Repository
     {
         private readonly LibraryContext context;
         private ObservableCollection<Book> books;
+        public BookRepository(LibraryContext context)
+        {
+            this.context = context;
+            context.Database.EnsureCreated();
+            books = new ObservableCollection<Book>(context.Books.ToList());
+        }
 
         public Task<bool> Add(Book book)
         {
