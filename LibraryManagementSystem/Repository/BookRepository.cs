@@ -32,22 +32,6 @@ namespace LibraryManagementSystem.Repository
             books.Add(bookToAdd);
             return true;
         }
-
-        public Task<bool> Borrow(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Edit(int id, string newTitle, string newAuthor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ObservableCollection<Book> GetAll()
-        {
-            return books;
-        }
-
         public async Task<bool> Remove(int id)
         {
             var bookToRemove = books.FirstOrDefault(b => b.Id == id);
@@ -57,6 +41,24 @@ namespace LibraryManagementSystem.Repository
             await context.SaveChangesAsync();
             books.Remove(bookToRemove);
             return true;
+        }
+        public async Task<bool> Edit(int id, string newTitle, string newAuthor)
+        {
+            var bookToEdit = books.FirstOrDefault(b => b.Id == id);
+            if (bookToEdit == null) return false;
+
+            bookToEdit.Title = newTitle;
+            bookToEdit.Author = newAuthor;
+            await context.SaveChangesAsync();
+            return true;
+        }
+        public Task<bool> Borrow(int id)
+        {
+            throw new NotImplementedException();
+        }
+        public ObservableCollection<Book> GetAll()
+        {
+            return books;
         }
 
         public Task<bool> Return(int id)
