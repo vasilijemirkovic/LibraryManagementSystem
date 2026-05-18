@@ -67,9 +67,15 @@ namespace LibraryManagementSystem.Repository
             return books;
         }
 
-        public Task<bool> Return(int id)
+        public async Task<bool> Return(int id)
         {
-            throw new NotImplementedException();
+            var book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null || !book.IsBorrowed) return false;
+
+            book.IsBorrowed = false;
+            book.BorrowedDate = null;
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }
