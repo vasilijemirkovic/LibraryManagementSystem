@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace LibraryManagementSystem.Repository
 {
     internal class BookRepository : IBookRepository
     {
+        private readonly LibraryContext context;
+        private ObservableCollection<Book> books;
+
         public Task<bool> Add(Book book)
         {
             throw new NotImplementedException();
