@@ -12,6 +12,9 @@ namespace LibraryManagementSystem
 
         private string _lastSearch = "";
         private string _lastStatus = "All";
+        public int TotalBooks => Books.Count;
+        public int AvailableBooks => Books.Count(b => !b.IsBorrowed);
+        public int BorrowedBooks => Books.Count(b => b.IsBorrowed);
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -44,7 +47,13 @@ namespace LibraryManagementSystem
         public MainViewModel()
         {
             filteredBooks = new ObservableCollection<Book>(Books);
-            Books.CollectionChanged += (s, e) => Search(_lastSearch);
+            Books.CollectionChanged += (s, e) =>
+            {
+                Search(_lastSearch);
+                OnPropertyChanged(nameof(TotalBooks));
+                OnPropertyChanged(nameof(AvailableBooks));
+                OnPropertyChanged(nameof(BorrowedBooks));
+            };
         }
 
         public async Task<bool> AddBook(string title, string author)
@@ -65,12 +74,18 @@ namespace LibraryManagementSystem
 
         public async Task<bool> BorrowBook(int id)
         {
-            return await library.borrowBook(id);
+            var result = await library.borrowBook(id);
+            OnPropertyChanged(nameof(AvailableBooks));
+            OnPropertyChanged(nameof(BorrowedBooks));
+            return result;
         }
 
         public async Task<bool> ReturnBook(int id)
         {
-            return await library.returnBook(id);
+            var result = await library.returnBook(id);
+            OnPropertyChanged(nameof(AvailableBooks));
+            OnPropertyChanged(nameof(BorrowedBooks));
+            return result;
         }
 
         public void Search(string search, string? status = null)
