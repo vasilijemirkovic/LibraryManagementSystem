@@ -1,4 +1,5 @@
 ﻿using LibraryManagementSystem.Data;
+using LibraryManagementSystem.Repository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,38 +16,22 @@ namespace LibraryManagementSystem
     internal class Library
     {
 
-        private readonly LibraryContext context;
-        private ObservableCollection<Book> books;
+        private readonly IBookRepository iBookRepository;
 
 
         public Library() {
-            context = new LibraryContext();
-            context.Database.EnsureCreated();
-            books = new ObservableCollection<Book>(context.Books.ToList());
+            var context = new LibraryContext();
+            iBookRepository = new BookRepository(context);
         }
 
         public async Task<bool> addBook(string title, string author) {
-
-            bool duplicate = books.Any(book => book.Title.ToLower() == title.ToLower() && book.Author.ToLower() == author.ToLower());
-            if (duplicate) return false;
-
-            var bookToAdd = new Book { Title = title, Author = author };
-            context.Books.Add(bookToAdd);
-            await context.SaveChangesAsync();
-            books.Add(bookToAdd);
-            return true;
+            var book = new Book { Title = title, Author = author };
+            return await iBookRepository.Add(book);
         }
 
         public async Task<bool> removeBook(int Id)
         {
-            var bookToDelete = books.FirstOrDefault(b => b.Id == Id);
-
-            if (bookToDelete == null) return false;
-
-            context.Books.Remove(bookToDelete);
-            await context.SaveChangesAsync();
-            books.Remove(bookToDelete);
-            return true;
+            return await iBookRepository.Remove(Id);
         }
 
         public async Task<bool> borrowBook(int Id)
