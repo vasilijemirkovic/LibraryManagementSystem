@@ -44,7 +44,7 @@ namespace LibraryManagementSystem
             return await iBookRepository.Return(Id);
         }
         public ObservableCollection<Book> GetBooks() {
-            return books;
+            return iBookRepository.GetAll();
         }
 
         public async Task<bool> EditBook(int id, string newTitle, string newAuthor)
