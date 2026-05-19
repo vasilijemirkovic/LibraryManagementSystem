@@ -47,7 +47,11 @@ namespace LibraryManagementSystem
         }
         private async void AddBook_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TitleBox.Text) || string.IsNullOrWhiteSpace(AuthorBox.Text)) {
+            if (string.IsNullOrWhiteSpace(TitleBox.Text) ||
+                string.IsNullOrWhiteSpace(AuthorBox.Text) ||
+                TitleBox.Text == "Title" ||
+                AuthorBox.Text == "Author")
+            {
                 Toast.Show("Please enter both title and author!", false);
                 return;
             }
