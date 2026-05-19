@@ -147,7 +147,8 @@
         <DataGrid Grid.Row="3" ItemsSource="{Binding FilteredBooks}"
                   SelectedItem="{Binding SelectedBook}"
                   AutoGenerateColumns="False"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
