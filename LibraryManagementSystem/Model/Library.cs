@@ -36,14 +36,7 @@ namespace LibraryManagementSystem
 
         public async Task<bool> borrowBook(int Id)
         {
-            var bookToBorrow = books.FirstOrDefault(b => b.Id == Id);
-
-            if (bookToBorrow == null || bookToBorrow.IsBorrowed) return false;
-
-            bookToBorrow.IsBorrowed = true;
-            bookToBorrow.BorrowedDate = DateTime.Now;
-            await context.SaveChangesAsync();
-            return true;
+            return await iBookRepository.Borrow(Id);
         }
 
         public async Task<bool> returnBook(int Id)
