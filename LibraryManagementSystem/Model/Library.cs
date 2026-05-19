@@ -1,5 +1,6 @@
 ﻿using LibraryManagementSystem.Data;
 using LibraryManagementSystem.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using static System.Reflection.Metadata.BlobBuilder;
 
 
 namespace LibraryManagementSystem
@@ -34,6 +36,11 @@ namespace LibraryManagementSystem
             return await iBookRepository.Remove(Id);
         }
 
+        public async Task<bool> editBook(int id, string newTitle, string newAuthor)
+        {
+            return await iBookRepository.Edit(id, newTitle, newAuthor);
+        }
+
         public async Task<bool> borrowBook(int Id)
         {
             return await iBookRepository.Borrow(Id);
@@ -43,19 +50,8 @@ namespace LibraryManagementSystem
         {
             return await iBookRepository.Return(Id);
         }
-        public ObservableCollection<Book> GetBooks() {
+        public ObservableCollection<Book> getBooks() {
             return iBookRepository.GetAll();
-        }
-
-        public async Task<bool> EditBook(int id, string newTitle, string newAuthor)
-        {
-            var bookToEdit = books.FirstOrDefault(b => b.Id == id);
-            if (bookToEdit == null) return false;
-
-            bookToEdit.Title = newTitle;
-            bookToEdit.Author = newAuthor;
-            await context.SaveChangesAsync();
-            return true;
         }
     }
 }
