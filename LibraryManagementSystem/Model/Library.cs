@@ -41,15 +41,7 @@ namespace LibraryManagementSystem
 
         public async Task<bool> returnBook(int Id)
         {
-            var bookToReturn = books.FirstOrDefault(b => b.Id == Id);
-
-            if (bookToReturn == null || !bookToReturn.IsBorrowed) return false;
-
-            bookToReturn.IsBorrowed = false;
-            bookToReturn.BorrowedDate = null;
-
-            await context.SaveChangesAsync();
-            return true;
+            return await iBookRepository.Return(Id);
         }
         public ObservableCollection<Book> GetBooks() {
             return books;
