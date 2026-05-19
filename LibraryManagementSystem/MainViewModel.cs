@@ -29,7 +29,7 @@ namespace LibraryManagementSystem
                 OnPropertyChanged(nameof(FilteredBooks));
             }
         }
-        public ObservableCollection<Book> Books => library.GetBooks();
+        public ObservableCollection<Book> Books => library.getBooks();
 
         private Book? selectedBook;
         public Book? SelectedBook
@@ -101,7 +101,7 @@ namespace LibraryManagementSystem
 
             if(newTitle.Length > 70 || newAuthor.Length > 70) return false;
 
-            return await library.EditBook(id, newTitle, newAuthor);
+            return await library.editBook(id, newTitle, newAuthor);
         }
     }
 }
