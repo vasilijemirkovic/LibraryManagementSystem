@@ -17,17 +17,18 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Height" Value="30"/>
+            <Setter Property="Cursor" Value="IBeam"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="6">
-                            <ScrollViewer x:Name="PART_ContentHost" 
-                                  Margin="5,0"
-                                  VerticalAlignment="Center"/>
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="5,0"
+                                          VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -44,11 +45,11 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" 
-                        CornerRadius="6" 
-                        Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                      VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -67,7 +68,7 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
-        
+
         <Style TargetType="ComboBoxItem">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#2E2E3E"/>
@@ -95,7 +96,6 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
 
-        
     </Window.Resources>
 
     <Grid Margin="20">
@@ -108,22 +108,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <!-- Title -->
         <TextBlock Grid.Row="0" Text="Library Management System"
                    FontSize="22" FontWeight="Bold"
-                   Foreground="#4C9BE8" Margin="0,0,0,20"/>
+                   Foreground="#4C9BE8" Margin="0,0,0,16"/>
 
-        <Grid Grid.Row="1" Margin="0,0,0,10">
+        <!-- Book inserting -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TitleBox" Grid.Column="0" Margin="0,0,10,0"/>
-            <TextBox x:Name="AuthorBox" Grid.Column="1" Margin="0,0,10,0"/>
+            <TextBox x:Name="TitleBox" Grid.Column="0" Margin="0,0,8,0"/>
+            <TextBox x:Name="AuthorBox" Grid.Column="1" Margin="0,0,8,0"/>
             <Button Grid.Column="2" Content="Add Book" Width="100" Click="AddBook_Click"/>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="0,0,0,10">
+        <!-- Button and searching -->
+        <Grid Grid.Row="2" Margin="0,0,0,8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -132,11 +135,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Edit Book" Width="100" Margin="0,0,10,0" Click="EditBook_Click"/>
-            <Button Grid.Column="1" Content="Delete Book" Width="100" Margin="0,0,10,0" Click="DeleteBook_Click"/>
-            <Button Grid.Column="2" Content="Borrow / Return" Width="120" Margin="0,0,10,0" Click="BorrowReturn_Click"/>
-            <Button Grid.Column="3" Content="Report" Width="100" Margin="0,0,10,0" Click="Report_Click"/>
-            <TextBox x:Name="SearchBox" Grid.Column="4" Margin="0,0,10,0" TextChanged="SearchBox_TextChanged"/>
+            <Button Grid.Column="0" Content="Edit Book" Width="100" Margin="0,0,8,0" Click="EditBook_Click"/>
+            <Button Grid.Column="1" Content="Delete Book" Width="100" Margin="0,0,8,0" Click="DeleteBook_Click"/>
+            <Button Grid.Column="2" Content="Borrow / Return" Width="120" Margin="0,0,8,0" Click="BorrowReturn_Click"/>
+            <Button Grid.Column="3" Content="Report" Width="100" Margin="0,0,8,0" Click="Report_Click"/>
+            <TextBox x:Name="SearchBox" Grid.Column="4" Margin="0,0,8,0" TextChanged="SearchBox_TextChanged"/>
             <ComboBox x:Name="StatusFilter" Grid.Column="5" SelectionChanged="StatusFilter_SelectionChanged">
                 <ComboBoxItem Content="All" IsSelected="True"/>
                 <ComboBoxItem Content="Available"/>
@@ -144,6 +147,7 @@
             </ComboBox>
         </Grid>
 
+        <!-- DataGrid -->
         <DataGrid Grid.Row="3" ItemsSource="{Binding FilteredBooks}"
                   SelectedItem="{Binding SelectedBook}"
                   AutoGenerateColumns="False"
@@ -170,10 +174,14 @@
                 <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat={}{0:dd.MM.yyyy}}" Width="120"/>
             </DataGrid.Columns>
         </DataGrid>
-        <local:ToastNotification x:Name="Toast" Grid.Row="4" 
-                          HorizontalAlignment="Right" 
-                          Margin="0,10,0,0"/>
-        <Border Grid.Row="5" Background="#2E2E3E" Padding="10,5" Margin="0,10,0,0" CornerRadius="4">
+
+        <!-- Toast -->
+        <local:ToastNotification x:Name="Toast" Grid.Row="4"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,8,0,0"/>
+
+        <!-- Status bar -->
+        <Border Grid.Row="5" Background="#2E2E3E" Padding="10,5" Margin="0,8,0,0" CornerRadius="4">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Total books: " Foreground="#4C9BE8" FontWeight="SemiBold"/>
                 <TextBlock Text="{Binding TotalBooks}" Foreground="White"/>
@@ -183,5 +191,6 @@
                 <TextBlock Text="{Binding BorrowedBooks}" Foreground="#FF6B6B"/>
             </StackPanel>
         </Border>
+
     </Grid>
 </Window>
