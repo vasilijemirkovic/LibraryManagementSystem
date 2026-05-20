@@ -36,13 +36,13 @@ namespace LibraryManagementSystem
             textBox.LostFocus += (s, e) => {
                 if (string.IsNullOrWhiteSpace(textBox.Text)) {
                     textBox.Text = placeholder;
-                    textBox.Foreground = Brushes.Gray;
+                    textBox.Foreground = Brushes.LightGray;
                 }
             };
 
             if (string.IsNullOrWhiteSpace(textBox.Text)) {
                 textBox.Text = placeholder;
-                textBox.Foreground = Brushes.Gray;
+                textBox.Foreground = Brushes.LightGray;
             }
         }
         private async void AddBook_Click(object sender, RoutedEventArgs e)
