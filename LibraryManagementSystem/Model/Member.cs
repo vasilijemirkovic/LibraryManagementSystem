@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Model
 {
-    class Member : INotifyPropertyChanged
+    public class Member : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
