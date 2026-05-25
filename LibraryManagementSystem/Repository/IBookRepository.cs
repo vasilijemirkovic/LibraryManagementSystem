@@ -13,7 +13,7 @@ namespace LibraryManagementSystem.Repository
         Task<bool> Add(Book book);
         Task<bool> Remove(int id);
         Task<bool> Edit(int id, string newTitle, string newAuthor);
-        Task<bool> Borrow(int id);
+        Task<bool> Borrow(int id, int memberId);
         Task<bool> Return(int id);
     }
 }
