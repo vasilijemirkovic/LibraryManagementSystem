@@ -52,13 +52,14 @@ namespace LibraryManagementSystem.Repository
             await context.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> Borrow(int id)
+        public async Task<bool> Borrow(int id, int memberId)
         {
             var bookToBorrow = books.FirstOrDefault(b => b.Id == id);
             if (bookToBorrow == null || bookToBorrow.IsBorrowed) return false;
 
             bookToBorrow.IsBorrowed = true;
             bookToBorrow.BorrowedDate = DateTime.Now;
+            bookToBorrow.MemberId = memberId;
             await context.SaveChangesAsync();
             return true;
         }
@@ -74,6 +75,7 @@ namespace LibraryManagementSystem.Repository
 
             book.IsBorrowed = false;
             book.BorrowedDate = null;
+            book.MemberId = null;
             await context.SaveChangesAsync();
             return true;
         }
