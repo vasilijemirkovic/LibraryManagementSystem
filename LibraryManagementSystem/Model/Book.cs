@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using LibraryManagementSystem.Model;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,6 +49,20 @@ namespace LibraryManagementSystem
                 OnPropertyChanged(nameof(IsBorrowed));
                 OnPropertyChanged(nameof(Status));
             }
+        }
+
+        private int? memberId;
+        public int? MemberId
+        {
+            get => memberId;
+            set { memberId = value; OnPropertyChanged(nameof(MemberId)); }
+        }
+
+        private Member? borrowedBy;
+        public Member? BorrowedBy
+        {
+            get => borrowedBy;
+            set { borrowedBy = value; OnPropertyChanged(nameof(BorrowedBy)); }
         }
 
         public string Status => IsBorrowed ? "NO" : "YES";
