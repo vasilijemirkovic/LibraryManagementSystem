@@ -43,8 +43,14 @@ namespace LibraryManagementSystem.Model
             get => phone;
             set { phone = value; OnPropertyChanged(nameof(Phone)); }
         }
-
         public Member() { }
+        public Member(int id, string name, string email, string phone)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Phone = phone;
+        }
 
     }
 }
