@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using LibraryManagementSystem.Model;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 
 namespace LibraryManagementSystem.View
@@ -69,6 +71,35 @@ namespace LibraryManagementSystem.View
             NameBox.Text = "";
             EmailBox.Text = "";
             PhoneBox.Text = "";
+        }
+
+        private async void EditMember_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedMember = MembersGrid.SelectedItem as Member;
+
+            if (selectedMember == null)
+            {
+                //TODO: Convert it to the toast!
+                MessageBox.Show("Select a member first!");
+                return;
+            }
+
+            //TODO: create editMemberWindow!
+            var editWindow = new EditMemberWindow(selectedMember.Name, selectedMember.Email, selectedMember.Phone);
+            editWindow.Owner = this;
+
+            if (editWindow.ShowDialog() == true)
+            {
+                bool success = await mainViewModel.EditMember(
+                    selectedMember.Id,
+                    editWindow.NewName!,
+                    editWindow.NewEmail!,
+                    editWindow.NewPhone!);
+
+                if (!success)
+                    MessageBox.Show("Failed to edit member!");
+            }
+
         }
 
     }
