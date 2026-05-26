@@ -90,17 +90,36 @@ namespace LibraryManagementSystem.View
 
             if (editWindow.ShowDialog() == true)
             {
-                bool success = await mainViewModel.EditMember(
+                bool memberEdited = await mainViewModel.EditMember(
                     selectedMember.Id,
                     editWindow.NewName!,
                     editWindow.NewEmail!,
                     editWindow.NewPhone!);
 
-                if (!success)
+                if (!memberEdited)
                     MessageBox.Show("Failed to edit member!");
             }
+        }
+        private async void DeleteMember_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedMember = MembersGrid.SelectedItem as Member;
+
+            if (selectedMember == null)
+            {
+                //TODO: Convert it to the toast!
+                MessageBox.Show("Select a member first!");
+                return;
+            }
+
+            var result = MessageBox.Show(
+                $"Are you sure you want to delete '{selectedMember.Name}'?", "Confirm Delete",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes) await mainViewModel.RemoveMember(selectedMember.Id);
 
         }
+
 
     }
 }
