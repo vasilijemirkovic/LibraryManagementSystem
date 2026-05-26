@@ -76,6 +76,11 @@
             <TextBox x:Name="PhoneBox" Grid.Column="2" Margin="0,0,8,0"/>
             <Button Grid.Column="3" Content="Add Member" Width="110" Click="AddMember_Click"/>
         </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,8">
+            <Button Content="Edit Member" Width="110" Margin="0,0,8,0" Click="EditMember_Click"/>
+            <Button Content="Delete Member" Width="110" Click="DeleteMember_Click"/>
+        </StackPanel>
     </Grid>
 
 
