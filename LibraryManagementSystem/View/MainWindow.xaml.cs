@@ -117,14 +117,14 @@ namespace LibraryManagementSystem
                 return;
             }
 
-            var selected = mainViewModel.SelectedBook;
+            var selectedBook = mainViewModel.SelectedBook;
 
-            if (selected.IsBorrowed) {
-                await mainViewModel.ReturnBook(selected.Id);
+            if (selectedBook.IsBorrowed) {
+                await mainViewModel.ReturnBook(selectedBook.Id);
                 Toast.Show("Book returned successfully!");
             }
             else {
-                await mainViewModel.BorrowBook(selected.Id);
+                await mainViewModel.BorrowBook(selectedBook.Id, );
                 Toast.Show("Book borrowed successfully!");
             }
         }
