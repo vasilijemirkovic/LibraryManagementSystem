@@ -63,6 +63,19 @@
         <TextBlock Grid.Row="0" Text="Members"
                    FontSize="20" FontWeight="Bold"
                    Foreground="#4C9BE8" Margin="0,0,0,16"/>
+
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="NameBox" Grid.Column="0" Margin="0,0,8,0"/>
+            <TextBox x:Name="EmailBox" Grid.Column="1" Margin="0,0,8,0"/>
+            <TextBox x:Name="PhoneBox" Grid.Column="2" Margin="0,0,8,0"/>
+            <Button Grid.Column="3" Content="Add Member" Width="110" Click="AddMember_Click"/>
+        </Grid>
     </Grid>
 
 
