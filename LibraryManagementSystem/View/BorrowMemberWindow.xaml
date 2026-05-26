@@ -52,6 +52,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <TextBlock Grid.Row="0" Text="Select a member to borrow the book:"
+                   FontSize="14" FontWeight="SemiBold"
+                   Foreground="#4C9BE8" Margin="0,0,0,10"/>
+
+
     </Grid>
 
 
