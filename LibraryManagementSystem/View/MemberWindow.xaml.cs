@@ -118,12 +118,5 @@ namespace LibraryManagementSystem.View
             if (result == MessageBoxResult.Yes) await mainViewModel.RemoveMember(selectedMember.Id);
 
         }
-        private void Members_Click(object sender, RoutedEventArgs e)
-        {
-            var memberWindow = new MemberWindow(mainViewModel);
-            memberWindow.Owner = this;
-            memberWindow.ShowDialog();
-        }
-
     }
 }
