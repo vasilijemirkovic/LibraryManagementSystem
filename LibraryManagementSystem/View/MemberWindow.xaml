@@ -59,6 +59,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Members"
+                   FontSize="20" FontWeight="Bold"
+                   Foreground="#4C9BE8" Margin="0,0,0,16"/>
     </Grid>
 
 
