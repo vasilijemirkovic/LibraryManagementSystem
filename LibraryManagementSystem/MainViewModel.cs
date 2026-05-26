@@ -1,4 +1,5 @@
-﻿    using System.Collections.ObjectModel;
+﻿using LibraryManagementSystem.Model;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
@@ -12,9 +13,6 @@ namespace LibraryManagementSystem
 
         private string _lastSearch = "";
         private string _lastStatus = "All";
-        public int TotalBooks => Books.Count;
-        public int AvailableBooks => Books.Count(b => !b.IsBorrowed);
-        public int BorrowedBooks => Books.Count(b => b.IsBorrowed);
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -33,6 +31,7 @@ namespace LibraryManagementSystem
             }
         }
         public ObservableCollection<Book> Books => library.getBooks();
+        public ObservableCollection<Member> Members => library.GetMembers();
 
         private Book? selectedBook;
         public Book? SelectedBook
@@ -44,6 +43,10 @@ namespace LibraryManagementSystem
                 OnPropertyChanged(nameof(SelectedBook));
             }
         }
+        public int TotalBooks => Books.Count;
+        public int AvailableBooks => Books.Count(b => !b.IsBorrowed);
+        public int BorrowedBooks => Books.Count(b => b.IsBorrowed);
+
         public MainViewModel()
         {
             filteredBooks = new ObservableCollection<Book>(Books);
@@ -67,14 +70,23 @@ namespace LibraryManagementSystem
             return await library.addBook(title, author);
         }
 
+        public async Task<bool> EditBook(int id, string newTitle, string newAuthor)
+        {
+            if (string.IsNullOrWhiteSpace(newTitle) || string.IsNullOrWhiteSpace(newAuthor)) return false;
+
+            if (newTitle.Length > 70 || newAuthor.Length > 70) return false;
+
+            return await library.editBook(id, newTitle, newAuthor);
+        }
+
         public async Task<bool> RemoveBook(int id)
         {
             return await library.removeBook(id);
         }
 
-        public async Task<bool> BorrowBook(int id)
+        public async Task<bool> BorrowBook(int id, int memberId)
         {
-            var result = await library.borrowBook(id);
+            var result = await library.borrowBook(id, memberId);
             OnPropertyChanged(nameof(AvailableBooks));
             OnPropertyChanged(nameof(BorrowedBooks));
             return result;
@@ -86,6 +98,20 @@ namespace LibraryManagementSystem
             OnPropertyChanged(nameof(AvailableBooks));
             OnPropertyChanged(nameof(BorrowedBooks));
             return result;
+        }
+        public async Task<bool> AddMember(string name, string email, string phone)
+        {
+            return await library.AddMember(name, email, phone);
+        }
+
+        public async Task<bool> RemoveMember(int id)
+        {
+            return await library.RemoveMember(id);
+        }
+
+        public async Task<bool> EditMember(int id, string name, string email, string phone)
+        {
+            return await library.EditMember(id, name, email, phone);
         }
 
         public void Search(string search, string? status = null)
@@ -109,14 +135,6 @@ namespace LibraryManagementSystem
                 filtered = filtered.Where(b => b.IsBorrowed);
 
             FilteredBooks = new ObservableCollection<Book>(filtered);
-        }
-        public async Task<bool> EditBook(int id, string newTitle, string newAuthor)
-        {
-            if (string.IsNullOrWhiteSpace(newTitle) || string.IsNullOrWhiteSpace(newAuthor)) return false;
-
-            if(newTitle.Length > 70 || newAuthor.Length > 70) return false;
-
-            return await library.editBook(id, newTitle, newAuthor);
         }
     }
 }
