@@ -84,7 +84,6 @@ namespace LibraryManagementSystem.View
                 return;
             }
 
-            //TODO: create editMemberWindow!
             var editWindow = new EditMemberWindow(selectedMember.Name, selectedMember.Email, selectedMember.Phone);
             editWindow.Owner = this;
 
