@@ -154,5 +154,11 @@ namespace LibraryManagementSystem
             reportWindow.Owner = this;
             reportWindow.ShowDialog();
         }
+        private void Members_Click(object sender, RoutedEventArgs e)
+        {
+            var memberWindow = new MemberWindow(mainViewModel);
+            memberWindow.Owner = this;
+            memberWindow.ShowDialog();
+        }
     }
 }
