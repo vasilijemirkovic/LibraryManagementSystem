@@ -49,7 +49,27 @@ namespace LibraryManagementSystem.View
             }
         }
 
+        private async void AddMember_Click(object sender, RoutedEventArgs e)
+        {
+            if (NameBox.Text == "Name" || EmailBox.Text == "Email" || PhoneBox.Text == "Phone" ||
+                string.IsNullOrWhiteSpace(NameBox.Text) || string.IsNullOrWhiteSpace(EmailBox.Text) ||
+                string.IsNullOrWhiteSpace(PhoneBox.Text))
+            {
+                MessageBox.Show("Please enter name, email and phone!");
+                return;
+            }
 
+            bool memberCanBeAdded = await mainViewModel.AddMember(NameBox.Text, EmailBox.Text, PhoneBox.Text);
+
+            if (!memberCanBeAdded) {
+                MessageBox.Show("This member already exists!");
+                return;
+            }
+
+            NameBox.Text = "";
+            EmailBox.Text = "";
+            PhoneBox.Text = "";
+        }
 
     }
 }
