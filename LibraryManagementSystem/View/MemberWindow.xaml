@@ -81,6 +81,18 @@
             <Button Content="Edit Member" Width="110" Margin="0,0,8,0" Click="EditMember_Click"/>
             <Button Content="Delete Member" Width="110" Click="DeleteMember_Click"/>
         </StackPanel>
+
+        <DataGrid Grid.Row="3" x:Name="MembersGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 
 
