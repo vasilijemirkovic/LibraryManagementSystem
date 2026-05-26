@@ -56,6 +56,19 @@
                    FontSize="14" FontWeight="SemiBold"
                    Foreground="#4C9BE8" Margin="0,0,0,10"/>
 
+        <DataGrid Grid.Row="1" x:Name="MembersGrid"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
 
     </Grid>
 
