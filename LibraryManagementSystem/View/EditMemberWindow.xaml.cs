@@ -19,9 +19,16 @@ namespace LibraryManagementSystem.View
     /// </summary>
     public partial class EditMemberWindow : Window
     {
-        public EditMemberWindow()
+        public string? NewName { get; private set; }
+        public string? NewEmail { get; private set; }
+        public string? NewPhone { get; private set; }
+
+        public EditMemberWindow(string currentName, string currentEmail, string currentPhone)
         {
             InitializeComponent();
+            NameBox.Text = currentName;
+            EmailBox.Text = currentEmail;
+            PhoneBox.Text = currentPhone;
         }
     }
 }
