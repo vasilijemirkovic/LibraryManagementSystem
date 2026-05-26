@@ -30,5 +30,21 @@ namespace LibraryManagementSystem.View
             EmailBox.Text = currentEmail;
             PhoneBox.Text = currentPhone;
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e) {
+
+            if(string.IsNullOrEmpty(NameBox.Text) ||
+               string.IsNullOrEmpty(EmailBox.Text) ||
+               string.IsNullOrEmpty(PhoneBox.Text)){
+                MessageBox.Show("Please enter all fields!");
+                return;
+            }
+
+            NewName = NameBox.Text;
+            NewEmail = EmailBox.Text;
+            NewPhone = PhoneBox.Text;
+            DialogResult = true;
+            Close();
+        }
     }
 }
