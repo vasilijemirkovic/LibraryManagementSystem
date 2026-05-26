@@ -124,8 +124,14 @@ namespace LibraryManagementSystem
                 Toast.Show("Book returned successfully!");
             }
             else {
-                await mainViewModel.BorrowBook(selectedBook.Id, );
-                Toast.Show("Book borrowed successfully!");
+
+                var borrowWindow = new BorrowMemberWindow(mainViewModel.Members);
+                borrowWindow.Owner = this;
+
+                if (borrowWindow.ShowDialog() == true) {
+                    await mainViewModel.BorrowBook(selectedBook.Id, borrowWindow.SelectedMember!.Id);
+                    Toast.Show("Book borrowed successfully!");
+                }
             }
         }
 
