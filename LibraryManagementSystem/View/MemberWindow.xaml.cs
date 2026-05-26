@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace LibraryManagementSystem.View
 {
@@ -19,9 +9,47 @@ namespace LibraryManagementSystem.View
     /// </summary>
     public partial class MemberWindow : Window
     {
-        public MemberWindow()
+
+        private MainViewModel mainViewModel;
+
+        public MemberWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            this.mainViewModel = mainViewModel;
+            MembersGrid.ItemsSource = mainViewModel.Members;
+
+            SetPlaceholder(NameBox, "Name");
+            SetPlaceholder(EmailBox, "Email");
+            SetPlaceholder(PhoneBox, "Phone number");
         }
+
+        private void SetPlaceholder(TextBox textBox, string placeholder)
+        {
+            textBox.GotFocus += (s, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.Foreground = System.Windows.Media.Brushes.White;
+                }
+            };
+
+            textBox.LostFocus += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text)) {
+                    textBox.Text = placeholder;
+                    textBox.Foreground = System.Windows.Media.Brushes.LightGray;
+                }
+            };
+
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = placeholder;
+                textBox.Foreground = System.Windows.Media.Brushes.LightGray;
+            }
+        }
+
+
+
     }
 }
