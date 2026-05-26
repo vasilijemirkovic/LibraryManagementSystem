@@ -1,10 +1,6 @@
 ﻿using LibraryManagementSystem.Data;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagementSystem.Repository
 {
@@ -16,7 +12,7 @@ namespace LibraryManagementSystem.Repository
         {
             this.context = context;
             context.Database.EnsureCreated();
-            books = new ObservableCollection<Book>(context.Books.ToList());
+            books = new ObservableCollection<Book>(context.Books.Include(b => b.BorrowedBy).ToList());
         }
 
         public async Task<bool> Add(Book bookToAdd)
