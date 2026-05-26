@@ -35,6 +35,14 @@
             <Setter Property="HeadersVisibility" Value="Column"/>
         </Style>
 
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#4C9BE8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="8,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
     </Window.Resources>
 
 
